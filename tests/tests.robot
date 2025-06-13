@@ -22,7 +22,7 @@ Atualizar tarefa
     ${body}=    Create Dictionary    title=Estudar RF    done=True
     ${response}=    PUT On Session    todo    /tasks/1    json=${body}
     Should Be Equal As Integers    ${response.status_code}    200
-    Should Contain    ${response.json()}    Estudar RF
+    Should Be Equal    ${response.json()}[title]    Estudar RF
 
 Deletar tarefa
     ${response}=    DELETE On Session    todo    /tasks/1
