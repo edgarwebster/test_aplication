@@ -52,6 +52,7 @@ jobs:
             --workdir /tests \
             --network host \
             websteredgar/robot-tests:latest \
-            robot tests.robot
+            bash -c "robot tests.robot"
+
 
 
