@@ -1,0 +1,9 @@
+# Dependências da aplicação
+flask
+
+# Dependências para testes
+robotframework
+robotframework-requests
+
+# (Opcional) se quiser usar SonarCloud via pip:
+coverage
