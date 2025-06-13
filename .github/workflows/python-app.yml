@@ -42,7 +42,7 @@ jobs:
 
       - name: Subir a aplicação Flask em background
         run: |
-          nohup python app.py &
+          nohup python application.py &
           sleep 5
 
       - name: Instalar dependências para testes
