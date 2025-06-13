@@ -44,7 +44,11 @@ jobs:
         run: |
           nohup python application.py &
           sleep 5
-
+          
+      - name: Verificar conteúdo da pasta tests
+        run: |
+          ls -l tests
+          
       - name: Rodar testes dentro de container
         run: |
           docker run --rm \
@@ -52,5 +56,5 @@ jobs:
             --workdir /tests \
             --network host \
             websteredgar/robot-tests:latest \
-            robot .
+            ls -l .
 
