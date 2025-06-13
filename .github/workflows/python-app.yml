@@ -51,8 +51,10 @@ jobs:
             -v ${{ github.workspace }}/tests:/tests \
             --workdir /tests \
             --network host \
+            --entrypoint bash \
             websteredgar/robot-tests:latest \
-            bash -c "robot tests.robot"
+            -c "robot tests.robot"
+
 
 
 
