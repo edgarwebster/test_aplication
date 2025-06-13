@@ -51,6 +51,6 @@ jobs:
             -v ${{ github.workspace }}/tests:/tests \
             --workdir /tests \
             --network host \
-            seuusuario/robot-tests:latest \
+            websteredgar/robot-tests:latest \
             robot .
 
