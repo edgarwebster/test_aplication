@@ -45,10 +45,19 @@ jobs:
           nohup python application.py &
           sleep 5
           
-      - name: Verificar conteúdo da pasta tests
+      - name: Verificar conteúdo da pasta tests no runner
         run: |
-          ls -l tests
-          
+          ls -l ${{ github.workspace }}/tests
+      
+      - name: Verificar conteúdo da pasta /tests dentro do container
+        run: |
+          docker run --rm \
+            --entrypoint ls \
+            -v ${{ github.workspace }}/tests:/tests \
+            --workdir /tests \
+            websteredgar/robot-tests:latest \
+            -l .
+      
       - name: Rodar testes dentro de container
         run: |
           docker run --rm \
@@ -56,5 +65,6 @@ jobs:
             --workdir /tests \
             --network host \
             websteredgar/robot-tests:latest \
-            ls -l .
+            robot .
+
 
