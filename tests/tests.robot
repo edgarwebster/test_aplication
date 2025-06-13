@@ -1,5 +1,6 @@
 *** Settings ***
 Library           RequestsLibrary
+Library           Collections
 
 Suite Setup       Create Session    todo    http://localhost:5000
 Suite Teardown    Delete All Tasks
@@ -8,32 +9,32 @@ Suite Teardown    Delete All Tasks
 
 Criar nova tarefa
     ${body}=    Create Dictionary    title=Estudar Robot Framework
-    ${response}=    Post Request    todo    /tasks    json=${body}
+    ${response}=    POST On Session    todo    /tasks    json=${body}
     Should Be Equal As Integers    ${response.status_code}    201
-    Dictionary Should Contain Key    ${response.json()}    id
+    Should Contain    ${response.json()}    id
 
 Listar tarefas
-    ${response}=    Get Request    todo    /tasks
+    ${response}=    GET On Session    todo    /tasks
     Should Be Equal As Integers    ${response.status_code}    200
-    Should Be True    ${response.json()}[0]['title'] == 'Estudar Robot Framework'
+    Should Be Equal    ${response.json()}[0][title]    Estudar Robot Framework
 
 Atualizar tarefa
     ${body}=    Create Dictionary    title=Estudar RF    done=True
-    ${response}=    Put Request    todo    /tasks/1    json=${body}
+    ${response}=    PUT On Session    todo    /tasks/1    json=${body}
     Should Be Equal As Integers    ${response.status_code}    200
-    Dictionary Should Contain Value    ${response.json()}    Estudar RF
+    Should Contain    ${response.json()}    Estudar RF
 
 Deletar tarefa
-    ${response}=    Delete Request    todo    /tasks/1
+    ${response}=    DELETE On Session    todo    /tasks/1
     Should Be Equal As Integers    ${response.status_code}    204
 
 Verificar tarefa removida
-    ${response}=    Get Request    todo    /tasks
+    ${response}=    GET On Session    todo    /tasks
     Length Should Be    ${response.json()}    0
 
 *** Keywords ***
 Delete All Tasks
-    ${response}=    Get Request    todo    /tasks
+    ${response}=    GET On Session    todo    /tasks
     FOR    ${task}    IN    @{response.json()}
-        Delete Request    todo    /tasks/${task['id']}
+        DELETE On Session    todo    /tasks/${task['id']}
     END
