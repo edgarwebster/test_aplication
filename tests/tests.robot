@@ -2,11 +2,10 @@
 Library           RequestsLibrary
 Library           Collections
 
-Suite Setup       Create Session    todo    http://host.docker.internal:5000
+Suite Setup       Create Session    todo    http://host.docker.internal:5050
 Suite Teardown    Delete All Tasks
 
 *** Test Cases ***
-
 Criar nova tarefa
     ${body}=    Create Dictionary    title=Estudar Robot Framework
     ${response}=    POST On Session    todo    /tasks    json=${body}
