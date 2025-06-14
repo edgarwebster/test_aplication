@@ -2,8 +2,8 @@
 Library           RequestsLibrary
 Library           Collections
 
-#Suite Setup       Create Session    todo    http://host.docker.internal:5050
-Suite Setup       Create Session    todo    http://0.0.0.0:5050
+Suite Setup       Create Session    todo    http://host.docker.internal:5050
+#Suite Setup       Create Session    todo    http://0.0.0.0:5050
 Suite Teardown    Delete All Tasks
 
 *** Test Cases ***
