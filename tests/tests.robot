@@ -2,7 +2,7 @@
 Library           RequestsLibrary
 Library           Collections
 
-Suite Setup       Create Session    todo    http://localhost:5000
+Suite Setup       Create Session    todo    http://host.docker.internal:5000
 Suite Teardown    Delete All Tasks
 
 *** Test Cases ***
